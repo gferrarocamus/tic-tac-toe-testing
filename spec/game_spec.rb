@@ -12,8 +12,8 @@ RSpec.describe Game do
     it 'returns true if player has an array of moves that includes [1,5,9]' do
       expect(game.player_wins([1, 2, 5, 9])).to eql(true)
     end
-    it "returns false if player's array of moves is [1,2,4,8,9], \
-      which has no winning combinations" do
+    it "returns false if player's array of moves is [1,2,4,8,9], "\
+        'which has no winning combinations' do
       expect(game.player_wins([1, 2, 4, 8, 9])).to eql(false)
     end
     it 'returns true if player has the array of moves [1,2,3]' do
