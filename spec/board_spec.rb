@@ -40,7 +40,7 @@ RSpec.describe Board do
       end
       expect(results2.all?).to eql(false)
     end
-    it 'returns false for a individual slots taken' do
+    it 'returns false when an individual slot is taken' do
       c = Board.new
       c.board[0] = 'X'
       expect(c.slot_available(1)).to eql(false)
