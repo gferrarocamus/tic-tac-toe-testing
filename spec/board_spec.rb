@@ -3,6 +3,7 @@ require './lib/board.rb'
 RSpec.describe Board do
   b = Board.new
   slot1 = b.board[0]
+  i = 1
 
   describe '#update_board' do
     it 'shows that the slot is initially 1' do
@@ -13,9 +14,9 @@ RSpec.describe Board do
       slot1 = b.board[0]
       expect(slot1).to eql('X')
     end
-    it 'changes the value of index 1 to the exact string specified' do
+    it 'changes the value of the specified index to the string provided' do
       b.update_board(2, 'test')
-      expect(b.board[1]).to eql('test')
+      expect(b.board[i]).to eql('test')
     end
   end
 end
@@ -23,13 +24,25 @@ end
 RSpec.describe Board do
   describe '#slot_available' do
     b = Board.new
-
-    it 'returns true if first slot is available' do
-      expect(b.slot_available(1)).to eql(true)
+    it 'returns true for all slots after board creation' do
+      results1 = []
+      b.board.each do |slot|
+        results1.push(b.slot_available(slot))
+      end
+      expect(results1.all?).to eql(true)
     end
-    c = Board.new
-    c.board[0] = 'X'
-    it 'returns false if the first slot is taken' do
+    b2 = Board.new
+    it 'returns false after a slot is updated' do
+      b2.board[0] = 'test'
+      results2 = []
+      b.board.each do |slot|
+        results2.push(b2.slot_available(slot))
+      end
+      expect(results2.all?).to eql(false)
+    end
+    it 'returns false for a individual slots taken' do
+      c = Board.new
+      c.board[0] = 'X'
       expect(c.slot_available(1)).to eql(false)
     end
   end
